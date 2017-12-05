@@ -25,6 +25,9 @@ while not crashed:
         print(event)
 
     pygame.display.update()
+    #TODO: update() should be changed so only the changes are updated
+    #https://www.pygame.org/docs/tut/newbieguide.html
+
     boy.draw(gameDisplay)
     clock.tick(60)
 
