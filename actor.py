@@ -4,7 +4,6 @@ import os
 class Actor:
     """
     is an image and a position on the surface.
-    has a controller that can move it around
     """
 
     def __init__(self, config, position):
@@ -16,6 +15,8 @@ class Actor:
         self.texture = self.load_image(config)
         self.texture = pygame.transform.smoothscale(self.texture, self.size)
         self.position = position
+        self.x_velocity = 0
+        self.y_velocity = 0
 
     def draw(self, surface):
         """
