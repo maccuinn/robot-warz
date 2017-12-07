@@ -1,5 +1,6 @@
 import pygame
 import config
+from pygame.locals import *
 from actor import Actor
 from item_config import item_types
 

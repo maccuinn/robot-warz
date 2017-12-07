@@ -1,7 +1,8 @@
 import pygame
 import os
 
-class Actor:
+
+class Actor(pygame.sprite.Sprite):
     """
     is an image and a position on the surface.
     """
@@ -11,8 +12,9 @@ class Actor:
         :param config: values from item_config.py
         :param position: (int, int). the x and y coordinates
         """
+        pygame.sprite.Sprite.__init__(self)
         self.size = config["size"]
-        self.texture = self.load_image(config)
+        self.texture, self.rect = self.load_image(config)
         self.texture = pygame.transform.smoothscale(self.texture, self.size)
         self.position = position
         self.x_velocity = 0
@@ -35,4 +37,4 @@ class Actor:
 
         image = image.convert()
 
-        return image
+        return image, image.get_rect()
