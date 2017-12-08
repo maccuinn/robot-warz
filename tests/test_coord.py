@@ -70,3 +70,16 @@ class TestCoord3d(unittest.TestCase):
     def test_dotted(self):
         dp = Coord3d(1, 2, 3).dotted(Coord3d(4, -5, 6))
         self.assertEquals(dp, 12)
+
+    def test_normalized(self):
+        n = Coord3d(10, 10, 10).normalized()
+        strvals = (str(n.x)[:5], str(n.y)[:5], str(n.z)[:5])
+        self.assertEqual(strvals, ('0.577', '0.577', '0.577'))
+
+    def test_length_sqr(self):
+        l2 = Coord3d(10, 10, 10).length_sqr()
+        self.assertEqual(l2, 300)
+
+    def test_length(self):
+        l = Coord3d(10, 10, 20).length()
+        self.assertEqual(str(l)[:5], '24.49')
