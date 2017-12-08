@@ -21,11 +21,17 @@ class Actor(pygame.sprite.Sprite):
         self.x_velocity = 0
         self.y_velocity = 0
 
+    def update(self, time):
+        self.position = (self.position[0] + self.x_velocity * time, self.position[1])
+
     def draw(self, surface):
         """
         :param surface: pygame.Surface.
         """
-        surface.blit(self.texture, self.position)
+        try:
+            surface.blit(self.texture, self.position)
+        except Exception as ex:
+            print(ex.message)
 
     def load_image(self, config):
         fullname = os.path.join('assets', 'textures',
