@@ -28,6 +28,11 @@ class Actor(pygame.sprite.Sprite):
         surface.blit(self.texture, self.position)
 
     def load_image(self, config):
+        """
+        :param config: item_config. includes actor type, texture (filename for image)
+        and size
+        :return: image and image rect
+        """
         fullname = os.path.join('assets', 'textures',
                                 config['type'], config['texture'])
         try:
