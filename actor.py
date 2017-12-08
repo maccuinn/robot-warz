@@ -1,5 +1,6 @@
 import pygame
 import os
+from os import path
 
 
 class Actor(pygame.sprite.Sprite):
@@ -27,7 +28,8 @@ class Actor(pygame.sprite.Sprite):
         surface.blit(self.texture, self.position)
 
     def load_image(self, config):
-        fullname = os.path.join('assets', 'textures', config['texture'])
+        fullname = os.path.join('assets', 'textures',
+                                config['type'], config['texture'])
         try:
             image = pygame.image.load(fullname)
 
