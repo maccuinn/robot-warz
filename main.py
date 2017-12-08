@@ -33,8 +33,8 @@ while not crashed:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
-        elif event.type == KEYDOWN and event.key == K_ESCAPE:
-            crashed = True
+
+        print(event)
 
     pygame.display.update()
     #TODO: update() should be changed so only the changes are updated
