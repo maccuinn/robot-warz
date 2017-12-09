@@ -17,6 +17,7 @@ class Actor(pygame.sprite.Sprite):
         self.size = config["size"]
         self.texture, self.rect = self.load_image(config)
         self.texture = pygame.transform.smoothscale(self.texture, self.size)
+
         self.position = position
         self.x_velocity = 0
         self.y_velocity = 0

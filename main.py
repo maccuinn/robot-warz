@@ -17,6 +17,13 @@ game_name = "Robot Warz"
 gameDisplay = pygame.display.set_mode(config.screen_size)
 pygame.display.set_caption(game_name)
 
+background = pygame.Surface(gameDisplay.get_size())
+background = background.convert()
+background.fill((208, 223, 237))
+
+gameDisplay.blit(background, (0, 0))
+pygame.display.flip()
+
 clock = pygame.time.Clock()
 
 players = [
@@ -27,6 +34,7 @@ players = [
 ]
 controllers = [Player(p) for p in players]
 id = 0
+
 for controller in controllers:
     controller.id = id
     id += 1
@@ -58,7 +66,6 @@ while not crashed:
             ):
             print(event)
 
-    pygame.display.update()
     #TODO: update() should be changed so only the changes are updated
     #https://www.pygame.org/docs/tut/newbieguide.html
     time = clock.tick(60)
@@ -66,6 +73,8 @@ while not crashed:
         actor.draw(gameDisplay)
     for actor in chain(players, robots):
         actor.update(time)
+
+    pygame.display.flip()
 
 pygame.joystick.quit()
 pygame.quit()
