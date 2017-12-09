@@ -1,6 +1,7 @@
 """
 Coordinate classes for representing a point in some euclidian space.
 """
+import math
 
 class Coord3d:
     """
@@ -105,14 +106,18 @@ class Coord3d:
         """
         return self.x * other.x + self.y * other.y + self.z * other.z
 
-"""
+    def normalized(self):
+        if self.x != 0 and self.y != 0 and self.z != 0:
+            return self.scaled(1 / self.length())
+        return Coord3d(0, 0, 0)
 
-    Coord3D Normalize() {
-        if ((x!=0)||(y!=0)||(z!=0)) {
-            *this *= (1/GetLength());
-        }
-        return *this;
-    };
+    def length_sqr(self):
+        return self.x * self.x + self.y * self.y + self.z * self.z
+
+    def length(self):
+        return math.sqrt(self.length_sqr())
+
+"""
 
     Coord3D GetNormalized() const { Coord3D result=*this;return result.Normalize();}
 

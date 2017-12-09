@@ -48,6 +48,6 @@ class Actor(pygame.sprite.Sprite):
             print('Cannot load image:', config['texture'])
             raise SystemExit(message)
 
-        image = image.convert()
+        image = image.convert_alpha()
 
         return image, image.get_rect()
