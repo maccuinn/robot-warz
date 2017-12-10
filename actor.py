@@ -3,21 +3,23 @@ import os
 from os import path
 
 
-class Actor(pygame.sprite.Sprite):
+class Actor(pygame.sprite.DirtySprite):
     """
     is an image and a position on the surface.
     """
 
-    def __init__(self, config, position):
+    def __init__(self, config, position, *args):
         """
         :param config: values from item_config.py
         :param position: (int, int). the x and y coordinates
         """
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.DirtySprite.__init__(self, *args)
         self.size = config["size"]
         self.texture, self.rect = self.load_image(config)
         self.texture = pygame.transform.smoothscale(self.texture, self.size)
 
+        #TODO change position to rect.topleft
+        #TODO use rect to update positions
         self.position = position
         self.x_velocity = 0
         self.y_velocity = 0

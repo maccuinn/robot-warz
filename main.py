@@ -26,24 +26,27 @@ pygame.display.flip()
 
 clock = pygame.time.Clock()
 
-players = [
+players = pygame.sprite.Group(
     Actor(item_types["player1"], (500, 600)),
     Actor(item_types["player2"], (100, 600)),
     Actor(item_types["player3"], (250, 600)),
-    Actor(item_types["player4"], (900, 600))
-]
-controllers = [Player(p) for p in players]
+    Actor(item_types["player4"], (900, 600)),
+)
+
+controllers = [Player(p) for p in players.sprites()]
 id = 0
 
 for controller in controllers:
     controller.id = id
     id += 1
 
-robots = [
+robots = pygame.sprite.Group(
     Actor(item_types["robot1"], (200, 300)),
     Actor(item_types["robot2"], (500, 300)),
     Actor(item_types["robot3"], (800, 500)),
-]
+)
+
+all_sprites = pygame.sprite.LayeredDirty(players, robots)
 
 crashed = False
 
@@ -69,10 +72,12 @@ while not crashed:
     #TODO: update() should be changed so only the changes are updated
     #https://www.pygame.org/docs/tut/newbieguide.html
     time = clock.tick(60)
-    for actor in chain(players, robots):
+
+    players.update(time)
+    robots.update(time)
+
+    for actor in chain(players.sprites(), robots):
         actor.draw(gameDisplay)
-    for actor in chain(players, robots):
-        actor.update(time)
 
     pygame.display.flip()
 
