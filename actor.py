@@ -15,26 +15,17 @@ class Actor(pygame.sprite.DirtySprite):
         """
         pygame.sprite.DirtySprite.__init__(self, *args)
         self.size = config["size"]
-        self.texture, self.rect = self.load_image(config)
-        self.texture = pygame.transform.smoothscale(self.texture, self.size)
-
-        #TODO change position to rect.topleft
-        #TODO use rect to update positions
+        self.texture = self.load_image(config)
+        self.image = pygame.transform.smoothscale(self.texture, self.size)
+        self.rect = self.image.get_rect()
         self.position = position
         self.x_velocity = 0
         self.y_velocity = 0
 
     def update(self, time):
         self.position = (self.position[0] + self.x_velocity * time, self.position[1])
-
-    def draw(self, surface):
-        """
-        :param surface: pygame.Surface.
-        """
-        try:
-            surface.blit(self.texture, self.position)
-        except Exception as ex:
-            print(ex.message)
+        self.rect.midbottom = self.position
+        self.dirty = 1
 
     def load_image(self, config):
         """
@@ -53,4 +44,4 @@ class Actor(pygame.sprite.DirtySprite):
 
         image = image.convert_alpha()
 
-        return image, image.get_rect()
+        return image

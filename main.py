@@ -14,14 +14,14 @@ joysticks = Joysticks([pygame.joystick.Joystick(i) for i in range(pygame.joystic
 
 game_name = "Robot Warz"
 
-gameDisplay = pygame.display.set_mode(config.screen_size)
+screen = pygame.display.set_mode(config.screen_size)
 pygame.display.set_caption(game_name)
 
-background = pygame.Surface(gameDisplay.get_size())
+background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill((208, 223, 237))
 
-gameDisplay.blit(background, (0, 0))
+screen.blit(background, (0, 0))
 pygame.display.flip()
 
 clock = pygame.time.Clock()
@@ -34,11 +34,11 @@ players = pygame.sprite.Group(
 )
 
 controllers = [Player(p) for p in players.sprites()]
-id = 0
+last_player_id = 0
 
 for controller in controllers:
-    controller.id = id
-    id += 1
+    controller.id = last_player_id
+    last_player_id += 1
 
 robots = pygame.sprite.Group(
     Actor(item_types["robot1"], (200, 300)),
@@ -47,10 +47,12 @@ robots = pygame.sprite.Group(
 )
 
 all_sprites = pygame.sprite.LayeredDirty(players, robots)
+all_sprites.clear(screen, background)
 
 crashed = False
 
 while not crashed:
+    time = clock.tick(60)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -69,17 +71,10 @@ while not crashed:
             ):
             print(event)
 
-    #TODO: update() should be changed so only the changes are updated
-    #https://www.pygame.org/docs/tut/newbieguide.html
-    time = clock.tick(60)
+    all_sprites.update(time)
+    rects = all_sprites.draw(screen)
 
-    players.update(time)
-    robots.update(time)
-
-    for actor in chain(players.sprites(), robots):
-        actor.draw(gameDisplay)
-
-    pygame.display.flip()
+    pygame.display.update(rects)
 
 pygame.joystick.quit()
 pygame.quit()
