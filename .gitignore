@@ -102,3 +102,6 @@ ENV/
 
 # windows preview thumbnail databases
 **/Thumbs.db
+
+# Very Large source assets
+assets/src
