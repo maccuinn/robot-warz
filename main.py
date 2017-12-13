@@ -8,13 +8,19 @@ from joysticks import Joysticks
 from itertools import chain
 
 pygame.init()
+
+version = pygame.get_sdl_version()
+print("sdl version: {0}.{1}.{2}".format(*version))
+
 pygame.joystick.init()
 joysticks = Joysticks([pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())])
-
 
 game_name = "Robot Warz"
 
 screen = pygame.display.set_mode(config.screen_size)
+print("Screen flags: {0}".format(screen.get_flags()))
+print("Screen driver: {0}".format(pygame.display.get_driver()))
+print("Display Info: {0}".format(pygame.display.Info()))
 pygame.display.set_caption(game_name)
 
 background = pygame.Surface(screen.get_size())
