@@ -7,6 +7,7 @@ from actor import Actor
 from player import Player
 from item_config import item_types
 
+
 class GameLayer(Layer):
     """
     Layer that holds the gameplay (grass and player(s)/robots)
