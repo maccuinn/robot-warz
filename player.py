@@ -1,14 +1,16 @@
-import pygame
+import cocos
+
 from controller import Controller
 from joysticks import Joysticks
+
+from pyglet.window import key
 
 
 class Player(Controller):
     """
     the player
     """
-    S_PER_MS = 0.001
-    SPEED = 500 * S_PER_MS
+    SPEED = 500
 
     def __init__(self, actor):
         """
@@ -19,29 +21,30 @@ class Player(Controller):
         # todo: generate id?
         self.id = None
         self._last_event = None
+        self.keys = {
+            key.LEFT: self.move_left,
+            key.RIGHT: self.move_right
+        }
 
-    def handle_event(self, event):
+    def handle_event(self, event_key, pressed):
         """
-        :param event: the event to handle
+        :param event_key the key that is pressed
+        :param pressed if the key is down or up
         :return:
         """
-        keys = {
-            pygame.K_LEFT: self.move_left,
-            pygame.K_RIGHT: self.move_right
-        }
-        """
-        pygame.K_UP: self.move_up,
-        pygame.K_DOWN: self.move_down
-        """
-        if event.type in (pygame.KEYDOWN, pygame.KEYUP):
-            method = keys.get(event.key)
 
-            if method is not None:
-                method(event.type == pygame.KEYDOWN)
-                return True
-        if event.type == pygame.JOYAXISMOTION:
-            return self.move_joy(event)
+        method = self.keys.get(event_key)
+
+        if method is not None:
+            method(pressed)
+            return True
         return False
+
+    def on_key_press(self, key, modifiers):
+        self.handle_event(key, True)
+
+    def on_key_release(self, key, modifiers):
+        self.handle_event(key, False)
 
     def move_left(self, moving):
         self.actor.x_velocity -= Player.SPEED * (1 if moving else -1)
@@ -55,4 +58,4 @@ class Player(Controller):
                 if self._last_event is None or event.value != self._last_event.value:
                     self.actor.x_velocity = event.value
                 return True
-        return  False
+        return False

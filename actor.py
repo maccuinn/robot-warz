@@ -1,6 +1,7 @@
 from cocos.sprite import Sprite
 from physics_action import PhysicsAction
 
+
 class Actor(Sprite):
     """
     is an image and a position on the surface.
@@ -17,8 +18,8 @@ class Actor(Sprite):
         self.actor = Sprite(texture_name)
         self.size = config["size"]
         self.position = position
-        self.x_velocity = 500
-        self.y_velocity = 1
+        self.x_velocity = 0
+        self.y_velocity = 0
         self.do(PhysicsAction())
 
     def update(self, time):

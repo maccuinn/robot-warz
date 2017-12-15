@@ -12,6 +12,8 @@ class GameLayer(Layer):
     """
     Layer that holds the gameplay (grass and player(s)/robots)
     """
+    is_event_handler = True
+
     def __init__(self, *args):
         super().__init__()
         self.players = [
@@ -24,6 +26,9 @@ class GameLayer(Layer):
             self.add(player)
 
         self.controllers = [Player(p) for p in self.players]
+
+        for controller in self.controllers:
+            self.add(controller)
 
         last_player_id = 0
 
