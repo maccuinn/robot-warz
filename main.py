@@ -1,4 +1,5 @@
 import cocos
+import patch_pyglet
 from cocos.director import director
 from pyglet.input import get_joysticks
 
