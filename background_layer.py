@@ -5,6 +5,7 @@ from cocos.layer import Layer
 from cocos.sprite import Sprite
 from os import path
 
+
 class BackgroundLayer(Layer):
     """
     Layer that holds the absolute bottom background layer

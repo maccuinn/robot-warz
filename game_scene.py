@@ -5,6 +5,7 @@ from cocos.scene import Scene
 from game_layer import GameLayer
 from background_layer import BackgroundLayer
 
+
 class GameScene(Scene):
     """
     Encapsulate the scene where the player is walking through

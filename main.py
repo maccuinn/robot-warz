@@ -4,12 +4,6 @@ from pyglet.input import get_joysticks
 
 import config
 from game_scene import GameScene
-from joysticks import Joysticks
-
-import os
-print(os.getcwd())
-print("sdl_lib_path: {0}".format(cocos.sdl_lib_path))
-print("cocos version: {0}".format(cocos.version))
 
 joysticks = get_joysticks()
 

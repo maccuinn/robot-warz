@@ -11,6 +11,10 @@ class Player(Controller):
     SPEED = 500 * S_PER_MS
 
     def __init__(self, actor):
+        """
+        
+        :param actor:
+        """
         super().__init__(actor)
         # todo: generate id?
         self.id = None
