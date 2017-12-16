@@ -26,3 +26,4 @@ class Actor(Sprite):
         self.position = (self.position[0] + self.x_velocity * time, self.position[1])
 
 
+

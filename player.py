@@ -14,8 +14,7 @@ class Player(Controller):
 
     def __init__(self, actor):
         """
-        
-        :param actor:
+        :param actor: an Actor
         """
         super().__init__(actor)
         # todo: generate id?
@@ -30,7 +29,7 @@ class Player(Controller):
         """
         :param event_key the key that is pressed
         :param pressed if the key is down or up
-        :return:
+        :return: True if valid event, False if not
         """
 
         method = self.keys.get(event_key)
@@ -41,10 +40,10 @@ class Player(Controller):
         return False
 
     def on_key_press(self, key, modifiers):
-        self.handle_event(key, True)
+        return self.handle_event(key, True)
 
     def on_key_release(self, key, modifiers):
-        self.handle_event(key, False)
+        return self.handle_event(key, False)
 
     def move_left(self, moving):
         self.actor.x_velocity -= Player.SPEED * (1 if moving else -1)

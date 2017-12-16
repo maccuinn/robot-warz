@@ -35,6 +35,7 @@ class GameLayer(Layer):
         for controller in self.controllers:
                 controller.id = last_player_id
                 last_player_id += 1
+
         self.robots = [
             Actor(item_types["robot1"], (200, 300)),
             Actor(item_types["robot2"], (500, 300)),
