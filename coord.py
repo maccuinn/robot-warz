@@ -3,6 +3,7 @@ Coordinate classes for representing a point in some euclidian space.
 """
 import math
 
+
 class Coord3d:
     """
     Coordinate in 3d space, or a vector direction in 3d space.

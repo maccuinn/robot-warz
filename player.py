@@ -5,6 +5,8 @@ from joysticks import Joysticks
 
 from pyglet.window import key
 
+from coord import Coord3d
+
 
 class Player(Controller):
     """
@@ -46,15 +48,8 @@ class Player(Controller):
         return self.handle_event(key, False)
 
     def move_left(self, moving):
-        self.actor.x_velocity -= Player.SPEED * (1 if moving else -1)
+        self.actor.velocity = self.actor.velocity.minus(Coord3d(Player.SPEED * (1 if moving else -1)))
 
     def move_right(self, moving):
-        self.actor.x_velocity += Player.SPEED * (1 if moving else -1)
+        self.actor.velocity = self.actor.velocity.plus(Coord3d(Player.SPEED * (1 if moving else -1)))
 
-    def move_joy(self, event):
-        if event.joy == self.id:
-            if event.axis == Joysticks.X_AXIS:
-                if self._last_event is None or event.value != self._last_event.value:
-                    self.actor.x_velocity = event.value
-                return True
-        return False
