@@ -15,9 +15,13 @@ class Actor(Sprite):
         texture_name = '/'.join(['assets', 'textures',
                                  config['type'], config['texture']])
         super().__init__(texture_name)
-        self.actor = Sprite(texture_name)
         self.size = config["size"]
-        self.position = position
+        rect = self.get_rect()
+        self.scale_x = self.size[0]/rect.width
+        self.scale_y = self.size[1]/rect.height
+        rect = self.get_rect()
+        rect.midbottom = position
+        self.position = rect.center
         self.x_velocity = 0
         self.y_velocity = 0
         self.do(PhysicsAction())
