@@ -24,7 +24,9 @@ class Player(Controller):
         self._last_event = None
         self.keys = {
             key.LEFT: self.move_left,
-            key.RIGHT: self.move_right
+            key.RIGHT: self.move_right,
+            key.UP: self.move_forward,
+            key.DOWN: self.move_backward
         }
 
     def handle_event(self, event_key, pressed):
@@ -52,4 +54,10 @@ class Player(Controller):
 
     def move_right(self, moving):
         self.actor.velocity = self.actor.velocity.plus(Coord3d(Player.SPEED * (1 if moving else -1)))
+
+    def move_forward(self, moving):
+        self.actor.velocity = self.actor.velocity.plus(Coord3d(y=Player.SPEED * (1 if moving else -1)))
+
+    def move_backward(self, moving):
+        self.actor.velocity = self.actor.velocity.minus(Coord3d(y=Player.SPEED * (1 if moving else -1)))
 
