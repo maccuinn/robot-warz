@@ -108,26 +108,34 @@ class Coord3d:
         return self.x * other.x + self.y * other.y + self.z * other.z
 
     def normalized(self):
+        """
+        Return a vector with the same direction, but with a length of 1 unit.
+        """
         if self.x != 0 and self.y != 0 and self.z != 0:
             return self.scaled(1 / self.length())
         return Coord3d(0, 0, 0)
 
     def length_sqr(self):
+        """
+        Return the length^2 of this vector
+        """
         return self.x * self.x + self.y * self.y + self.z * self.z
 
     def length(self):
+        """
+        Length in units of this ector
+        """
         return math.sqrt(self.length_sqr())
+
+    def clamped(self, max_length):
+        if (max_length * max_length < self.length_sqr()):
+            return self.normalized().scaled(max_length)
+        return Coord3d(self)
+
+
 
 """
 
-    Coord3D GetNormalized() const { Coord3D result=*this;return result.Normalize();}
-
-    void Clamp(CoordUnit maxLength) {//faster way to do this without normalize?
-        if (maxLength*maxLength < (x*x+y*y+z*z)) {
-            Normalize();
-            Scale(maxLength);
-        }
-    }
 
     void Clamp(const Coord3D &other) {
         x = ClampCoordUnit(x,other.x);
