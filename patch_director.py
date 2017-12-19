@@ -41,5 +41,9 @@ def set_projection2D(self):
 def exec():
     from cocos.director import director, Director
 
-    Director.set_projection2D = set_projection2D
-    Director.set_projection3D = set_projection3D
+    try:
+        from pyglet.window.cocoa import CocoaWindow
+        Director.set_projection2D = set_projection2D
+        Director.set_projection3D = set_projection3D
+    except ImportError:
+        pass
