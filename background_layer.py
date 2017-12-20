@@ -3,7 +3,8 @@ Module containing BackgoundLayer
 """
 from cocos.layer import Layer
 from cocos.sprite import Sprite
-from os import path
+
+import config
 
 
 class BackgroundLayer(Layer):
@@ -19,3 +20,10 @@ class BackgroundLayer(Layer):
                                        "background.png"]))
         self.sprite.position = 0, 0
         self.add(self.sprite)
+        width = config.screen_size[0]
+        height = config.screen_size[1]
+        rect = self.sprite.get_rect()
+        self.sprite.image_anchor = rect.center
+        self.sprite.scale_x = width / rect.width
+        self.sprite.scale_y = height / rect.height
+
