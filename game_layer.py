@@ -35,10 +35,10 @@ class GameLayer(Layer):
             for y in range(0, height, grass_distance)
         ]
         for grass in self.grass:
-            self.add(grass)
+            self.add(grass, -grass.coord.y)
 
         for player in self.players:
-            self.add(player)
+            self.add(player, -player.coord.y)
         self.add(self.label)
         self.controllers = [Player(p) for p in self.players]
 
@@ -57,5 +57,5 @@ class GameLayer(Layer):
             Actor(item_types["robot3"], (800, 500)),
         ]
         for robot in self.robots:
-            self.add(robot)
+            self.add(robot, -robot.coord.y)
 
