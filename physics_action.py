@@ -30,7 +30,6 @@ class PhysicsAction(Action):
             y = NEAR_PLANE
         self.target.coord = Coord3d(x, y, z)
 
-
         distance = (y - NEAR_PLANE) / FAR_PLANE
 
         self.target.scale = NEAR_SCALE - (distance * (NEAR_SCALE - FAR_SCALE))
@@ -47,5 +46,6 @@ class PhysicsAction(Action):
 
         rect = self.target.get_rect()  # get_rect might be slow
         rect.midbottom = x, y
-        self.target.debug_label.element.text = '{0},{1}'.format(x,y)
+        if self.target.debug_label is not None:
+            self.target.debug_label.element.text = '{0},{1}'.format(x, y)
         self.target.position = rect.center

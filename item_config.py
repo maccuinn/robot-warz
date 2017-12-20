@@ -8,4 +8,8 @@ item_types = {
     "robot1": {"type": "robot", "texture": "metal_computer.png", "size": (50, 50)},
     "robot2": {"type": "robot", "texture": "squaredah.png", "size": (128, 128)},
     "robot3": {"type": "robot", "texture": "squaredoo.png", "size": (140, 140)},
+
+    "grass1": {"type": "environment", "texture": "grass1.png", "size": (300, 50)},
+    "grass2": {"type": "environment", "texture": "grass1.png", "size": (300, 50)},
+    "grass3": {"type": "environment", "texture": "grass1.png", "size": (300, 50)}
 }

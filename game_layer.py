@@ -2,11 +2,12 @@
 Module containing GameLayer
 """
 from cocos.layer import Layer
-from cocos.sprite import Sprite
 from cocos.text import Label
+
 from actor import Actor
 from player import Player
 from item_config import item_types
+import config
 
 
 class GameLayer(Layer):
@@ -22,10 +23,20 @@ class GameLayer(Layer):
         self.label.position = 100, 100
         self.players = [
             Actor(item_types["player1"], (500, 600), self.label),
-            #Actor(item_types["player2"], (100, 600)),
-            #Actor(item_types["player3"], (250, 600)),
-            #Actor(item_types["player4"], (900, 600)),
+            Actor(item_types["player2"], (100, 600)),
+            Actor(item_types["player3"], (250, 600)),
+            Actor(item_types["player4"], (900, 600)),
         ]
+        width, height = config.screen_size
+        grass_distance = 60
+        self.grass = [
+            Actor(item_types["grass" + str((x + y) % 3 + 1)], (x, y))
+            for x in range(0, width, grass_distance)
+            for y in range(0, height, grass_distance)
+        ]
+        for grass in self.grass:
+            self.add(grass)
+
         for player in self.players:
             self.add(player)
         self.add(self.label)
@@ -41,9 +52,10 @@ class GameLayer(Layer):
                 last_player_id += 1
 
         self.robots = [
-            #Actor(item_types["robot1"], (200, 300)),
-            #Actor(item_types["robot2"], (500, 300)),
-            #Actor(item_types["robot3"], (800, 500)),
+            Actor(item_types["robot1"], (200, 300)),
+            Actor(item_types["robot2"], (500, 300)),
+            Actor(item_types["robot3"], (800, 500)),
         ]
         for robot in self.robots:
             self.add(robot)
+
