@@ -69,7 +69,7 @@ class TestCoord3d(unittest.TestCase):
 
     def test_dotted(self):
         dp = Coord3d(1, 2, 3).dotted(Coord3d(4, -5, 6))
-        self.assertEquals(dp, 12)
+        self.assertEqual(dp, 12)
 
     def test_normalized(self):
         n = Coord3d(10, 10, 10).normalized()
@@ -83,3 +83,9 @@ class TestCoord3d(unittest.TestCase):
     def test_length(self):
         l = Coord3d(10, 10, 20).length()
         self.assertEqual(str(l)[:5], '24.49')
+
+    def  test_clamped(self):
+        c = Coord3d(10, 10, 10)
+        self.assertEqual(c.clamped(20).tuple(), (10, 10, 10))
+        strs = [str(axis)[:3] for axis in c.clamped(17).tuple()]
+        self.assertEqual(strs, ['9.8', '9.8' ,'9.8'])
