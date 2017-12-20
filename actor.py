@@ -9,13 +9,14 @@ class Actor(Sprite):
     is an image and a position on the surface.
     """
 
-    def __init__(self, config, position):
+    def __init__(self, config, position, debug_label=None):
         """
         :param config: values from item_config.py
         :param position: (int, int). the x and y coordinates
         """
         texture_name = '/'.join(['assets', 'textures',
                                  config['type'], config['texture']])
+        self.debug_label = debug_label
         super().__init__(texture_name)
         self.size = config["size"]
         rect = self.get_rect()
