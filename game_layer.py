@@ -69,3 +69,4 @@ class GameLayer(Layer):
         for robot in self.robots:
             self.add(robot, -robot.coord.y)
 
+        print("Game Layer Children" + str(len(self.children)))
