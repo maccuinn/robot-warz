@@ -16,19 +16,28 @@ SCREEN_FAR_WIDTH = config.screen_size[0] * 0.5
 
 
 class PhysicsAction(Action):
-    def step(self, dt):
+    def start(self):
+        self.rendered = False
 
+    def step(self, dt):
+        if self.target.velocity.is_zero() and self.rendered:
+            return
+        self.rendered = True
         self.target.coord = self.target.velocity.scaled(dt).plus(self.target.coord)
         x, y, z = self.target.coord.tuple()
-        if x > config.screen_size[0]:
-            x = config.screen_size[0]
-        if x < 0:
-            x = 0
-        if y > FAR_PLANE:
-            y = FAR_PLANE
-        if y < NEAR_PLANE:
-            y = NEAR_PLANE
-        self.target.coord = Coord3d(x, y, z)
+
+        if not self.target.velocity.is_zero():
+            x, y, z = self.target.coord.tuple()
+
+            if x > config.screen_size[0]:
+                x = config.screen_size[0]
+            if x < 0:
+                x = 0
+            if y > FAR_PLANE:
+                y = FAR_PLANE
+            if y < NEAR_PLANE:
+                y = NEAR_PLANE
+            self.target.coord = Coord3d(x, y, z)
 
         distance = (y - NEAR_PLANE) / FAR_PLANE
 

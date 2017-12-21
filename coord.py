@@ -128,11 +128,18 @@ class Coord3d:
         return math.sqrt(self.length_sqr())
 
     def clamped(self, max_length):
+        """
+        Clamp the vector to max_length (scale to max_length if length is larger than max_length)
+        """
         if (max_length * max_length < self.length_sqr()):
             return self.normalized().scaled(max_length)
         return Coord3d(self)
 
-
+    def is_zero(self):
+        """
+        Return true all components are zero
+        """
+        return self.x == 0 and self.y == 0 and self.z == 0
 
 """
 
