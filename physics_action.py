@@ -1,7 +1,7 @@
 from cocos.actions import Action
 
 import config
-from coord import Coord3d
+from cocos.euclid import Vector3
 
 
 NEAR_PLANE = 0
@@ -20,14 +20,14 @@ class PhysicsAction(Action):
         self.rendered = False
 
     def step(self, dt):
-        if self.target.velocity.is_zero() and self.rendered:
+        if not self.target.velocity and self.rendered:
             return
         self.rendered = True
-        self.target.coord = self.target.velocity.scaled(dt).plus(self.target.coord)
-        x, y, z = self.target.coord.tuple()
+        self.target.coord = self.target.velocity * dt + self.target.coord
+        x, y, z = self.target.coord.xyz
 
-        if not self.target.velocity.is_zero():
-            x, y, z = self.target.coord.tuple()
+        if self.target.velocity:
+            x, y, z = self.target.coord.xyz
 
             if x > config.screen_size[0]:
                 x = config.screen_size[0]
@@ -37,7 +37,7 @@ class PhysicsAction(Action):
                 y = FAR_PLANE
             if y < NEAR_PLANE:
                 y = NEAR_PLANE
-            self.target.coord = Coord3d(x, y, z)
+            self.target.coord = Vector3(x, y, z)
 
         distance = (y - NEAR_PLANE) / FAR_PLANE
 

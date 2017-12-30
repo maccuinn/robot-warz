@@ -5,7 +5,7 @@ from joysticks import Joysticks
 
 from pyglet.window import key
 
-from coord import Coord3d
+from cocos.euclid import Vector3
 
 
 class Player(Controller):
@@ -50,14 +50,14 @@ class Player(Controller):
         return self.handle_event(key, False)
 
     def move_left(self, moving):
-        self.actor.velocity = self.actor.velocity.minus(Coord3d(Player.SPEED * (1 if moving else -1)))
+        self.actor.velocity = self.actor.velocity - Vector3(Player.SPEED * (1 if moving else -1))
 
     def move_right(self, moving):
-        self.actor.velocity = self.actor.velocity.plus(Coord3d(Player.SPEED * (1 if moving else -1)))
+        self.actor.velocity = self.actor.velocity + Vector3(Player.SPEED * (1 if moving else -1))
 
     def move_forward(self, moving):
-        self.actor.velocity = self.actor.velocity.plus(Coord3d(y=Player.SPEED * (1 if moving else -1)))
+        self.actor.velocity = self.actor.velocity + Vector3(y=Player.SPEED * (1 if moving else -1))
 
     def move_backward(self, moving):
-        self.actor.velocity = self.actor.velocity.minus(Coord3d(y=Player.SPEED * (1 if moving else -1)))
+        self.actor.velocity = self.actor.velocity - Vector3(y=Player.SPEED * (1 if moving else -1))
 

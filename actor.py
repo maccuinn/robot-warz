@@ -1,7 +1,7 @@
 from cocos.sprite import Sprite
 from physics_action import PhysicsAction
 
-from coord import Coord3d
+from cocos.euclid import Vector3
 
 
 class Actor(Sprite):
@@ -25,8 +25,8 @@ class Actor(Sprite):
         rect = self.get_rect()
         rect.midbottom = position
         self.position = rect.center
-        self.coord = Coord3d(*position)
-        self.velocity = Coord3d()
+        self.coord = Vector3(*position)
+        self.velocity = Vector3()
         self.do(PhysicsAction())
 
 
