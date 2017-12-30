@@ -44,7 +44,7 @@ class GameLayer(Layer):
             batch = BatchNode()
             for grass in grass_batch:
                 grass.alpha = 0.8
-                batch.add(grass, -grass.coord.y)
+                batch.add(grass)
             self.add(batch, -grass_batch[0].coord.y)
 
         for player in self.players:
@@ -68,5 +68,10 @@ class GameLayer(Layer):
         ]
         for robot in self.robots:
             self.add(robot, -robot.coord.y)
+            # -robot.coord.y
+
+        self.castle = Actor(item_types["castle1"], (500, 1000))
+
+        self.add(self.castle, -self.castle.coord.y)
 
         print("Game Layer Children" + str(len(self.children)))
