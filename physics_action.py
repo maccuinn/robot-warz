@@ -58,3 +58,6 @@ class PhysicsAction(Action):
         if self.target.debug_label is not None:
             self.target.debug_label.element.text = '{0},{1}'.format(x, y)
         self.target.position = rect.center
+        if self.target.velocity.y != 0:
+            self.target.parent.remove(self.target)
+            self.target.parent.add(self.target, -self.target.coord.y)
