@@ -18,6 +18,7 @@ SCREEN_FAR_WIDTH = config.screen_size[0] * 0.5
 class PhysicsAction(Action):
     def start(self):
         self.rendered = False
+        self.step(0)
 
     def step(self, dt):
         if not self.target.velocity and self.rendered:
@@ -54,7 +55,7 @@ class PhysicsAction(Action):
         y = (distance * screen_y_diff) + SCREEN_NEAR_Y
 
         rect = self.target.get_rect()  # get_rect might be slow
-        rect.midbottom = x, y
+        rect.midbottom = x, y + z * self.target.scale
         if self.target.debug_label is not None:
             self.target.debug_label.element.text = '{0},{1}'.format(x, y)
         self.target.position = rect.center

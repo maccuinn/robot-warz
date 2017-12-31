@@ -14,6 +14,8 @@ item_types = {
     "grass2": {"type": "environment", "texture": "grass2.png", "size": (150, 60)},
     "grass3": {"type": "environment", "texture": "grass3.png", "size": (150, 68)},
 
-    "castle1": {"type": "environment", "texture": "castle1.png", "size": (1024, 512)}
+    "castle1": {"type": "environment", "texture": "castle1.png", "size": (1024, 512)},
+
+    "rock": {"type": "items", "texture": "fruitbowl.png", "size": (10, 10)},
 
 }

@@ -22,9 +22,9 @@ class Actor(Sprite):
         rect = self.get_rect()
         self.scale_x = self.size[0]/rect.width
         self.scale_y = self.size[1]/rect.height
-        rect = self.get_rect()
-        rect.midbottom = position
-        self.position = rect.center
+        #rect = self.get_rect()
+        #rect.midbottom = position
+        #self.position = rect.center
         self.coord = Vector3(*position)
         self.velocity = Vector3()
         self.do(PhysicsAction())
