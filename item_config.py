@@ -10,9 +10,9 @@ item_types = {
     "robot3": {"type": "robot", "texture": "squaredoo.png", "size": (140, 140)},
 
 
-    "grass1": {"type": "environment", "texture": "grass1.png", "size": (150, 62)},
-    "grass2": {"type": "environment", "texture": "grass2.png", "size": (150, 70)},
-    "grass3": {"type": "environment", "texture": "grass3.png", "size": (150, 85)},
+    "grass1": {"type": "environment", "texture": "grass1.png", "size": (150, 52)},
+    "grass2": {"type": "environment", "texture": "grass2.png", "size": (150, 60)},
+    "grass3": {"type": "environment", "texture": "grass3.png", "size": (150, 68)},
 
     "castle1": {"type": "environment", "texture": "castle1.png", "size": (1024, 512)}
 

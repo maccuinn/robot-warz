@@ -28,8 +28,3 @@ class Actor(Sprite):
         self.coord = Vector3(*position)
         self.velocity = Vector3()
         self.do(PhysicsAction())
-
-
-
-
-
