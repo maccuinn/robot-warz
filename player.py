@@ -2,7 +2,7 @@ import cocos
 
 from controller import Controller
 from actor import Actor
-from item_config import item_types
+from game_config import item_types
 
 from pyglet.window import key
 
@@ -61,7 +61,6 @@ class Player(Controller):
         self.actor.velocity = self.actor.velocity + Vector3(Player.SPEED * (1 if moving else -1))
         self.shoot_direction = 1
 
-
     def move_forward(self, moving):
         self.actor.velocity = self.actor.velocity + Vector3(y=Player.SPEED * (1 if moving else -1))
 
@@ -73,6 +72,8 @@ class Player(Controller):
             x, y = self.actor.coord.xy
             rock = Actor(item_types["rock"], (x, y, self.actor.size[1] * 0.6))
             rock.velocity = Vector3(y=Player.SHOOT_SPEED)
+            rock.owner = self.actor
 
-            self.actor.parent.add(rock)
-
+            game_layer = self.actor.parent
+            game_layer.add(rock)
+            game_layer.projectiles.append(rock)

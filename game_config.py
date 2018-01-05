@@ -16,6 +16,11 @@ item_types = {
 
     "castle1": {"type": "environment", "texture": "castle1.png", "size": (1024, 512)},
 
-    "rock": {"type": "items", "texture": "fruitbowl.png", "size": (10, 10)},
-
+    "rock": {"type": "items", "texture": "fruitbowl.png", "size": (40, 40)},
 }
+
+game_board = {
+    "size": (1000, 1000),
+    "castle_depth": 40,
+}
+

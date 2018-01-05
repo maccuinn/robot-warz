@@ -3,12 +3,13 @@ Module containing GameLayer
 """
 from cocos.layer import Layer
 from cocos.text import Label
+from random import randint
+from cocos.collision_model import CollisionManagerGrid
 
 from actor import Actor
+from collision_action import CollisionAction
 from player import Player
-from item_config import item_types
-import config
-from random import randint
+from game_config import item_types, game_board
 
 
 class GameLayer(Layer):
@@ -20,18 +21,18 @@ class GameLayer(Layer):
     def __init__(self, *args):
         super().__init__()
 
+        width, height = game_board["size"]
         self.label = Label("debug")
         self.label.position = 100, 100
         self.players = [
-            Actor(item_types["player1"], (500, 600), self.label),
-            Actor(item_types["player2"], (100, 600)),
-            Actor(item_types["player3"], (250, 600)),
-            Actor(item_types["player4"], (900, 600)),
+            Actor(item_types["player1"], (500, 100), self.label),
+            #Actor(item_types["player2"], (100, 600)),
+            #Actor(item_types["player3"], (250, 600)),
+            #Actor(item_types["player4"], (900, 600)),
         ]
 
-        width, height = config.screen_size
         grass_distance = 50
-        x_margin, y_margin, width, height = (width // 2, grass_distance, width, 960)
+        x_margin, y_margin, width, height = (width // 2, grass_distance, width, height - game_board["castle_depth"])
         self.grass = [
             [
                 Actor(item_types["grass" + str(randint(1, 3))], (x, y))
@@ -46,6 +47,8 @@ class GameLayer(Layer):
                 grass.alpha = 0.8
                 batch.add(grass)
             self.add(batch, -grass_batch[0].coord.y)
+
+        self.projectiles = []
 
         for player in self.players:
             self.add(player, -player.coord.y)
@@ -62,9 +65,12 @@ class GameLayer(Layer):
             last_player_id += 1
 
         self.robots = [
-            Actor(item_types["robot1"], (200, 300)),
-            Actor(item_types["robot2"], (500, 300)),
-            Actor(item_types["robot3"], (800, 500)),
+            Actor(item_types["robot1"], (200, 700)),
+            Actor(item_types["robot1"], (800, 400)),
+            Actor(item_types["robot1"], (300, 500)),
+            Actor(item_types["robot1"], (600, 600)),
+            Actor(item_types["robot2"], (500, 800)),
+            Actor(item_types["robot3"], (800, 900)),
         ]
         for robot in self.robots:
             self.add(robot, -robot.coord.y)
@@ -75,3 +81,5 @@ class GameLayer(Layer):
         self.add(self.castle, -self.castle.coord.y)
 
         print("Game Layer Children" + str(len(self.children)))
+
+        self.do(CollisionAction())

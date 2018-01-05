@@ -1,29 +1,31 @@
 from cocos.actions import Action
 
 import config
-from cocos.euclid import Vector3
+from game_config import game_board
+from cocos.euclid import Vector3, Vector2
+from cocos.collision_model import CircleShape
 
 
 NEAR_PLANE = 0
-FAR_PLANE = 1000
+FAR_PLANE = game_board["size"][1]
 NEAR_SCALE = 1
 FAR_SCALE = 0.5
 SCREEN_NEAR_Y = 10
 SCREEN_FAR_Y = 490
-SCREEN_NEAR_WIDTH = config.screen_size[0]
-# todo should look into making this a percentage...possibly 50%?
-SCREEN_FAR_WIDTH = config.screen_size[0] * 0.5
+SCREEN_NEAR_WIDTH = game_board["size"][0]
+SCREEN_FAR_WIDTH = SCREEN_NEAR_WIDTH * 0.5
 
 
 class PhysicsAction(Action):
     def start(self):
-        self.rendered = False
         self.step(0)
 
     def step(self, dt):
-        if not self.target.velocity and self.rendered:
+        if not (self.target.velocity or self.target.dirty):
             return
-        self.rendered = True
+
+        self.target.dirty = False
+
         self.target.coord = self.target.velocity * dt + self.target.coord
         x, y, z = self.target.coord.xyz
 
@@ -43,6 +45,9 @@ class PhysicsAction(Action):
         distance = (y - NEAR_PLANE) / FAR_PLANE
 
         self.target.scale = NEAR_SCALE - (distance * (NEAR_SCALE - FAR_SCALE))
+        if self.target.big:
+            self.target.scale *= 2
+
         screen_width_diff = SCREEN_NEAR_WIDTH - SCREEN_FAR_WIDTH
         screen_y_diff = SCREEN_FAR_Y - SCREEN_NEAR_Y
 
@@ -62,3 +67,6 @@ class PhysicsAction(Action):
         if self.target.velocity.y != 0:
             self.target.parent.remove(self.target)
             self.target.parent.add(self.target, -self.target.coord.y)
+
+        self.target.cshape = CircleShape(Vector2(*self.target.coord.xy), self.target.size[0] / 2)
+
