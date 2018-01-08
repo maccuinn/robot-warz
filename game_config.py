@@ -3,8 +3,8 @@ item_types = {
     "player2": {"type": "player", "texture": "danny.png", "size": (78, 78), "name": "Danny", "equip": "slingshot2"},
     "player3": {"type": "player", "texture": "sally.png", "size": (78, 78), "name": "Sally", "equip": "slingshot3"},
     "player4": {"type": "player", "texture": "tanker.png", "size": (78, 78), "name": "Tanker", "equip": "slingshot4"},
-    "player4": {"type": "player", "texture": "smele.png", "size": (78, 78), "name": "Smiley", "equip": "slingshot5"},
-    "player4": {"type": "player", "texture": "melody.png", "size": (78, 78), "name": "Melody", "equip": "slingshot6"},
+    "player5": {"type": "player", "texture": "smele.png", "size": (78, 78), "name": "Smiley", "equip": "slingshot5"},
+    "player6": {"type": "player", "texture": "melody.png", "size": (78, 78), "name": "Melody", "equip": "slingshot6"},
 
     "slingshot1": {"type": "items", "texture": "slingshot_orange.png", "size": (30, 30), "name": "Slingshot"},
     "slingshot2": {"type": "items", "texture": "slingshot_black.png", "size": (30, 30), "name": "Slingshot"},
