@@ -14,6 +14,16 @@ class Actor(Sprite):
         """
         :param config: values from game_config.py
         :param position: (int, int). the x and y coordinates
+
+        big: boolean. true if actor currently enlarged, false if actor currently small
+        dirty: boolean. true if they need to be redrawn, false if not.
+        owner: Actor. if actor is a projectile, owner will be set to the actor that shoots the projectile
+        size: size of actor on the screen at the near plane.
+        scale_x: double. the ratio between the player size and the texture size (for x)
+        scale_y: double. the ratio between the player size and the texture size (for y)
+        coord: Vector3. game coordinates of actor
+        velocity: Vector3. Starts out at 0, 0, 0
+        cshape: the collision shape
         """
         texture_name = '/'.join(['assets', 'textures',
                                  config['type'], config['texture']])
@@ -31,5 +41,3 @@ class Actor(Sprite):
         self.do(PhysicsAction())
         self.cshape = CircleShape(Vector2(*self.coord.xy), self.size[0] / 2)
 
-    def collide(self, others):
-        pass
