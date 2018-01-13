@@ -19,12 +19,14 @@ class Player(Controller):
     def __init__(self, actor):
         """
         :param actor: an Actor
+
+        id: player number
+        keys: Dictionary. Keys are the key commands available in the game. Values are the
+            methods associated with each key press.
         """
         super().__init__(actor)
         # todo: generate id?
         self.id = None
-        self._last_event = None
-        self.shoot_direction = 1
         self.keys = {
             key.LEFT: self.move_left,
             key.RIGHT: self.move_right,
@@ -55,11 +57,9 @@ class Player(Controller):
 
     def move_left(self, moving):
         self.actor.velocity = self.actor.velocity - Vector3(Player.SPEED * (1 if moving else -1))
-        self.shoot_direction = -1
 
     def move_right(self, moving):
         self.actor.velocity = self.actor.velocity + Vector3(Player.SPEED * (1 if moving else -1))
-        self.shoot_direction = 1
 
     def move_forward(self, moving):
         self.actor.velocity = self.actor.velocity + Vector3(y=Player.SPEED * (1 if moving else -1))
